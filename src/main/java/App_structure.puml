@@ -1,0 +1,602 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "App",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_100706955 { 
+   	label=graphics
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   FireFighterPainter100706955[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FireFighterPainter</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cloudIcon: Image [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ffIcon: Image [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fireIcon: Image [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ftIcon: Image [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mountainIcon: Image [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   roadIcon: Image [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rockIcon: Image [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- loadImage(path: String): Image</TD></TR>
+<TR><TD ALIGN="LEFT" >- loadImages()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ paintCloud(row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >- paintElement(image: Image, row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ paintFire(row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ paintFireFighter(row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ paintFireTrucks(row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ paintMountain(row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ paintRoad(row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ paintRock(row: int, col: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GridPainter100706955[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GridPainter</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   colCount: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   context: GraphicsContext [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   grid: Grid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   height: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   rowCount: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   width: double [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ paint(row: int, col: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ repaint()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1664901180 { 
+   	label=obstacles
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Mountains51545118[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Mountains</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   grid: FireFighterGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   model: FireFighterSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mountainsList: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setPosition(): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Road51545118[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Road</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   grid: FireFighterGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   model: FireFighterSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   roadPositions: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setPosition(): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Rocks51545118[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Rocks</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   grid: FireFighterGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   model: FireFighterSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rockPositions: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setPosition(): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2086687961 { 
+   	label=simulatorcontrol
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   FireExtinguisher83215621[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FireExtinguisher</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   grid: FireFighterGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   model: FireFighterSimulator [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># aStepTowardFire(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" ># extinguish(position: Position)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FireFighterGrid83215621[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FireFighterGrid</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   colCount: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   height: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   model: FireFighterSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   painter: FireFighterPainter [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   rowCount: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   width: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ mousePressed(mouseEvent: MouseEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ restart(mouseEvent: MouseEvent)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FireFighterSimulator83215621[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FireFighterSimulator</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   clouds: Clouds [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fireFighters: FireFighters [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fireTrucks: FireTrucks [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   fires: Fires [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   mountains: Mountains [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   road: Road [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   rock: Rocks [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ skipMountain(position: Position): List&lt;Position&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ skipMountainAndRoad(position: Position): List&lt;Position&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PlagueSimulator1249695211[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PlagueSimulator</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   doctors: Doctors [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   infectedPeople: InfectedPeople [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   vaccinatedPeople: VaccinatedPeople [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   virologists: Virologists [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   virus: Virus [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+VirusEradicator1249695211[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)VirusEradicator</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   grid: PlagueGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   model: PlagueSimulator [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ aStepTowardVirus(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" ># eliminate(position: Position)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2102114367 { 
+   	label=entities
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Clouds166686691[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Clouds</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cloudsList: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ fightFire(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ randomStep(position: Position): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Doctors1506928387[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Doctors</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   doctorsList: List&lt;Position&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   grid: PlagueGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   model: PlagueSimulator [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ eliminateVirus(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FireFighters166686691[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FireFighters</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   firefighterPositions: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ fightFire(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FireTrucks166686691[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FireTrucks</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   firetruckPositions: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ fightFire(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >- twoStepsTowardFire(position: Position): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Fires166686691[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Fires</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   firesSet: Set&lt;Position&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   grid: FireFighterGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   model: FireFighterSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   step: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >- calculateNewFirePositions(): List&lt;Position&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >- propagateFires()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+InfectedPeople1506928387[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)InfectedPeople</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   grid: PlagueGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   model: PlagueSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   peoplePositions: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >- contaminate(position: Position)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ contaminateVaccinated(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ randomStep(position: Position): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+VaccinatedPeople1506928387[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)VaccinatedPeople</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   grid: PlagueGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   model: PlagueSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   vpPositions: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Virologists1506928387[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Virologists</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   grid: PlagueGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   model: PlagueSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   virologistsList: List&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ eliminateVirus(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >- twoStepsTowardVirus(position: Position): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Virus1506928387[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Virus</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   grid: PlagueGrid [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   model: PlagueSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   step: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   virusSet: Set&lt;Position&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ aStepTowardPeople(position: Position): Position</TD></TR>
+<TR><TD ALIGN="LEFT" >+ activation()</TD></TR>
+<TR><TD ALIGN="LEFT" ># contaminate(position: Position)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialisation(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ kill(position: Position): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2114710383 { 
+   	label=abstracts
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Movement44332193[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Movement</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   colCount: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   rowCount: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ next(position: Position): List&lt;Position&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ randomPosition(): Position</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_66049 { 
+   	label=App
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   App66049[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)App</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   isInPause: boolean [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ start(primaryStage: Stage)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_747804969 { 
+   	label=position
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Position747804969[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Position</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   col: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   row: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ col(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ row(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+App66049 -> FireFighterSimulator83215621[label="start() -> activation()"];
+Clouds166686691 -> FireFighterPainter100706955[label="activation() -> paintCloud()"];
+Clouds166686691 -> FireFighters166686691[arrowhead=none];
+Clouds166686691 -> FireTrucks166686691[arrowhead=none];
+Clouds166686691 -> GridPainter100706955[label="activation() -> paint()"];
+Clouds166686691 -> Position747804969[label="cloudsList
+[0..*]"];
+FireExtinguisher83215621 -> Clouds166686691[arrowhead=none, arrowtail=empty, dir=both];
+FireFighterSimulator83215621 -> Clouds166686691[label="clouds
+[0..1]"];
+FireFighterSimulator83215621 -> FireFighters166686691[label="fireFighters
+[0..1]"];
+FireFighterSimulator83215621 -> FireTrucks166686691[label="fireTrucks
+[0..1]"];
+FireFighterSimulator83215621 -> Fires166686691[label="fires
+[0..1]"];
+FireFighterSimulator83215621 -> Mountains51545118[label="mountains
+[0..1]"];
+FireFighterSimulator83215621 -> PlagueSimulator1249695211[arrowhead=none];
+FireFighterSimulator83215621 -> Road51545118[label="road
+[0..1]"];
+FireFighterSimulator83215621 -> Rocks51545118[label="rock
+[0..1]"];
+Movement44332193 -> FireFighterSimulator83215621[arrowhead=none, arrowtail=empty, dir=both];
+Movement44332193 -> PlagueSimulator1249695211[arrowhead=none, arrowtail=empty, dir=both];
+PlagueSimulator1249695211 -> Doctors1506928387[label="doctors
+[0..1]"];
+PlagueSimulator1249695211 -> InfectedPeople1506928387[label="infectedPeople
+[0..1]"];
+PlagueSimulator1249695211 -> VaccinatedPeople1506928387[label="vaccinatedPeople
+[0..1]"];
+PlagueSimulator1249695211 -> Virologists1506928387[label="virologists
+[0..1]"];
+PlagueSimulator1249695211 -> Virus1506928387[label="virus
+[0..1]"];
+Road51545118 -> FireExtinguisher83215621[arrowhead=none];
+Road51545118 -> FireFighterGrid83215621[label="grid
+[0..1]"];
+Road51545118 -> FireFighterPainter100706955[label="activation() -> paintRoad()"];
+Road51545118 -> FireFighterSimulator83215621[label="model
+[0..1]"];
+Road51545118 -> Fires166686691[arrowhead=none];
+Road51545118 -> InfectedPeople1506928387[arrowhead=none];
+Road51545118 -> Mountains51545118[arrowhead=none];
+Road51545118 -> Movement44332193[label="setPosition() -> randomPosition()"];
+Road51545118 -> Position747804969[label="roadPositions
+[0..*]"];
+Road51545118 -> Rocks51545118[arrowhead=none];
+Road51545118 -> VaccinatedPeople1506928387[arrowhead=none];
+Road51545118 -> Virus1506928387[arrowhead=none];
+Road51545118 -> VirusEradicator1249695211[arrowhead=none];
+    
+}
+@enduml
